@@ -87,6 +87,8 @@ var App = {
 			this.$intro = new Element('video',{
 				controls:false,
 				autoplay:true,
+				width:'100%',
+				height:'100%',
 				styles:{
 					position:'fixed',
 					top:0,
@@ -94,7 +96,8 @@ var App = {
 					right:0,
 					bottom:0,
 					width:'100%',
-					height:'100%'
+					height:'100%',
+					'z-index':100
 				}
 			}).inject(this.$body)
 			.adopt(new Element('source',{
