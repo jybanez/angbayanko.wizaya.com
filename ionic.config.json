@@ -1,0 +1,7 @@
+{
+  "name": "Ang Bayan Ko",
+  "type": "custom",
+  "integrations": {
+    "cordova": {}
+  }
+}
