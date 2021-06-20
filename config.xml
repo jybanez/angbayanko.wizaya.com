@@ -79,6 +79,9 @@
 		<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
 			<string>Need location access to find shops nearby</string>
 		</edit-config>
+		<edit-config target="NSContactsUsageDescription" file="*-Info.plist" mode="merge" >
+		    <string>Need contacts access for features and functionality purposes</string>
+		</edit-config>
 	</platform>
 	<platform name="android">
 		<allow-intent href="market:*" />
@@ -177,6 +180,5 @@
 	<plugin name="cordova-plugin-app-version" />
 	
 	<plugin name="cordova-plugin-videoplayer" spec="https://github.com/moust/cordova-plugin-videoplayer" />
-	
-	
+	<plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />
 </widget>
