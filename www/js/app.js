@@ -40,34 +40,47 @@ var App = {
 			this.$assets = new Array();
 			this.$isLoaded = new Array();
 			
-			console.log('Welcome!',this.$id,device);
+			//console.log('Welcome!',this.$id,device);
 			if (['android'].contains(device.platform.toLowerCase())) {
 				new App.Interface.Log();	
 			}
-			this.intro();
-			this.initializeAssets();
-			cordova.getAppVersion.getVersionNumber(function (version) {
-				this.$version = version;
-				App.FileSystem.getInstance('TEMPORARY',{
-					base:'/'+this.$id,
-					onReady:function(instance){
-						this.$fileSystem = instance;
-						
-						this.initializeNetwork.delay(1000,this,function(){
-							this.run(function(){
-								this.hideSplash();
-							}.bind(this));	
-						}.bind(this));
-						
-						/* 
-						this.$fileSystem.clear(function(){
-							this.run();
-						}.bind(this)); 
-						//this.reset();
-						*/
-					}.bind(this)
-				});
+			
+			
+			this.intro(function(){
+				this.initializeAssets();
+				if ($defined(cordova.getAppVersion)) {
+					cordova.getAppVersion.getVersionNumber(function (version) {
+						this.$version = version;
+						App.FileSystem.getInstance('TEMPORARY',{
+							base:'/'+this.$id,
+							onReady:function(instance){
+								this.$fileSystem = instance;
+								
+								this.initializeNetwork.delay(1000,this,function(){
+									this.run(function(){
+										this.hideSplash();
+									}.bind(this));	
+								}.bind(this));
+							}.bind(this)
+						});
+					}.bind(this));	
+				} else {
+					App.FileSystem.getInstance('TEMPORARY',{
+						base:'/'+this.$id,
+						onReady:function(instance){
+							this.$fileSystem = instance;
+							
+							this.initializeNetwork.delay(1000,this,function(){
+								this.run(function(){
+									this.hideSplash();
+								}.bind(this));	
+							}.bind(this));
+						}.bind(this)
+					});
+				}
 			}.bind(this));
+			
+			
 			
 			App.$instance = this;
 			 
@@ -83,7 +96,7 @@ var App = {
 				}
 			});
 		},
-		intro:function(){
+		intro:function(onComplete){
 			this.$intro = new Element('video',{
 				controls:false,
 				autoplay:true,
@@ -97,17 +110,15 @@ var App = {
 					bottom:0,
 					width:'100%',
 					height:'100%',
-					'z-index':100
+					'z-index':100,
+					background:'#000'
 				}
 			}).inject(this.$body)
 			.adopt(new Element('source',{
 				src:'video/intro.mp4',
 				type:'video/mp4'
-			}));
-			this.$intro.addEventListener('ended',function(){
-				this.$intro.destroy();
-			}.bind(this),false);
-			this.$intro.play();
+			})); 
+			this.$intro.addEventListener('ended',onComplete,false);
 		},
 		initializeAssets:function(){
 			this.$splash = this.$body.getElement('.splash.poster');
