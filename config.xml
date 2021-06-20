@@ -182,6 +182,5 @@
 	<plugin name="cordova-plugin-local-notification" />
 	<plugin name="cordova-plugin-app-version" />
 	
-	<plugin name="cordova-plugin-videoplayer" spec="https://github.com/moust/cordova-plugin-videoplayer" />
 	<plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />
 </widget>

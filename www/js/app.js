@@ -28,15 +28,7 @@ var App = {
 			}
 		},
 		$assetsUpdated:false,
-		initialize:function(app,options){
-			VideoPlayer.play('/video/intro.mp4',{
-		        volume: 0.5,
-		        scalingMode: VideoPlayer.SCALING_MODE.SCALE_TO_FIT_WITH_CROPPING
-		    },function () {
-		    	VideoPlayer.close();
-		    },function (err) {
-		        console.log('Unable to play intro video',err);
-		    });		       
+		initialize:function(app,options){     
 			this.app = app;
 			var url = app.toURI();
 			this.$id = url.get('host');
@@ -52,7 +44,7 @@ var App = {
 			if (['android'].contains(device.platform.toLowerCase())) {
 				new App.Interface.Log();	
 			}
-			
+			this.intro();
 			this.initializeAssets();
 			cordova.getAppVersion.getVersionNumber(function (version) {
 				this.$version = version;
@@ -90,6 +82,29 @@ var App = {
 					}
 				}
 			});
+		},
+		intro:function(){
+			this.$intro = new Element('video',{
+				controls:false,
+				autoplay:true,
+				styles:{
+					position:'fixed',
+					top:0,
+					left:0,
+					right:0,
+					bottom:0,
+					width:'100%',
+					height:'100%'
+				}
+			}).inject(this.$body)
+			.adopt(new Element('source',{
+				src:'video/intro.mp4',
+				type:'video/mp4'
+			}));
+			this.$intro.addEventListener('ended',function(){
+				this.$intro.destroy();
+			}.bind(this),false);
+			this.$intro.play();
 		},
 		initializeAssets:function(){
 			this.$splash = this.$body.getElement('.splash.poster');
