@@ -145,7 +145,9 @@
     <allow-intent href="geo:*" />
 	
 	<preference name="windows-target-version" value="10.0" />
+	<!--
 	<preference name="phonegap-version" value="cli-9.0.0" />
+	-->
 	
 	<preference name="StatusBarOverlaysWebView" value="false" />
 	<preference name="StatusBarBackgroundColor" value="#000000" />
