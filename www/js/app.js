@@ -118,7 +118,10 @@ var App = {
 				src:'video/intro.mp4',
 				type:'video/mp4'
 			})); 
-			this.$intro.addEventListener('ended',onComplete,false);
+			this.$intro.addEventListener('ended',function(){
+				this.$intro.destroy();
+				$pick(onComplete,$empty)();
+			}.bind(this),false);
 		},
 		initializeAssets:function(){
 			this.$splash = this.$body.getElement('.splash.poster');
