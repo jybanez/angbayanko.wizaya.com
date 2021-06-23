@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wizaya.angbayanko" 
-	version="1.0.1" 
+	version="1.0.2" 
 	versionCode="" 
 	xmlns="http://www.w3.org/ns/widgets" 
 	xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -70,14 +70,17 @@
         
         <preference name="WKSuspendInBackground" value="false" />
         
+        <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+		    <string>Need to access camera to take pictures for your account profile photo</string>
+		</edit-config>
         <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
 			<string>Need to access photo library for uploading photos for your account profile and product inquiries.</string>
 		</edit-config>
 		<edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-			<string>Need location access to find shops nearby</string>
+			<string>Need location access to find nearby activities</string>
 		</edit-config>
 		<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-			<string>Need location access to find shops nearby</string>
+			<string>Need location access to find nearby activities</string>
 		</edit-config>
 		<edit-config target="NSContactsUsageDescription" file="*-Info.plist" mode="merge" >
 		    <string>Need contacts access for features and functionality purposes</string>
@@ -172,8 +175,9 @@
     <plugin name="cordova-plugin-bluetooth-printer" spec="https://github.com/jybanez/BluetoothPrinter" />
     <plugin name="cordova-plugin-camera" spec="https://github.com/apache/cordova-plugin-camera.git" />
 	<plugin name="phonegap-plugin-speech-synthesis" spec="https://github.com/macdonst/SpeechSynthesisPlugin" />
+	<!-->
 	<plugin name="cordova-plugin-background-mode" spec="https://github.com/sercatven/cordova-plugin-background-mode" />
-	
+-->
 	<plugin name="cordova-plugin-androidx" />
 	<plugin name="cordova-plugin-androidx-adapter" />
 	
